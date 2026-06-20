@@ -12,6 +12,8 @@ struct ResultView: View {
     let gender: Gender
     let imc: Double
     @Binding var navigationPath: NavigationPath
+    
+    private let imcStorage = IMCStorage()
 
     var result: String {
         switch imc {
@@ -44,6 +46,7 @@ struct ResultView: View {
                 finalIMC
             }
             HStack {
+                addToListButton
                 listButton
             }
             resetButton
@@ -85,6 +88,7 @@ struct ResultView: View {
         AppButton(text: "Recalcular IMC"){
             navigationPath = NavigationPath()
         }
+        .padding(.top, 20)
     }
     //MARK: - list button
     var listButton: some View {
@@ -102,6 +106,19 @@ struct ResultView: View {
         }
         .buttonStyle(.bordered)
         .padding(.horizontal)
+    }
+    
+    //MARK: - add to list button
+    var addToListButton: some View {
+        AppButton(text: "Adicionar"){
+            let imcData = IMCData(
+                name: userName,
+                gender: gender.name,
+                imc: imc
+            )
+            imcStorage.items.append(imcData)
+        }
+        .disabled(userName.isEmpty)
     }
 }
 

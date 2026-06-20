@@ -24,7 +24,6 @@ struct AppButton: View {
         }
         .buttonStyle(.borderedProminent)
         .padding(.horizontal)
-        .padding(.top, 20)
     }
 }
 

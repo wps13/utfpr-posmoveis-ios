@@ -30,7 +30,7 @@ struct ContentView: View {
                         navigationPath: $navigationPath
                     )
                 case .list:
-                    Text("Tela de listagem")
+                    ListView()
                 }
             }
         }
