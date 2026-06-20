@@ -14,6 +14,8 @@ struct HomeView: View {
     @State private var height: Int = 180
     @State private var weight: Int = 70
     
+    let showResult: (String, Gender, Double) -> Void
+    
     var body: some View {
         VStack(spacing: 22) {
             titleView
@@ -95,14 +97,16 @@ struct HomeView: View {
     
     //MARK: - Calculate IMC Button
     var calculateIMCButton: some View {
-        AppButton(
-            action: {},
-            text: "Calcular IMC"
-        )
+        AppButton(text: "Calcular IMC") {
+            let imc = Double(weight)/(Double(height*height)/10000)
+            showResult(userName, selectedGender, imc)
+        }
     }
     
 }
 
 #Preview {
-    HomeView()
+    HomeView{userName,selectedGender,_ in
+   
+    }
 }

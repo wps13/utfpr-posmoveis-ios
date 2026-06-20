@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct AppButton: View {
-    let action: () -> Void
     let text: String
+    let action: () -> Void
+
+    
     var body: some View {
         Button(action: action) {
             Text(text)
@@ -27,10 +29,7 @@ struct AppButton: View {
 }
 
 #Preview {
-    AppButton(
-        action: {
-            print("clicked")
-        },
-        text: "Continuar"
-    )
+    AppButton(text: "Continuar"){
+        print("clicked")
+    }
 }

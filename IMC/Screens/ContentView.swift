@@ -8,14 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var navigationPath = NavigationPath()
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack(path: $navigationPath) {
+            HomeView { userName, gender, imc in
+                navigationPath.append(
+                    AppRoute.result(
+                        userName: userName,
+                        gender: gender,
+                        imc: imc
+                    )
+                )
+            }
+            .navigationDestination(for: AppRoute.self) { route in
+                switch route {
+                case .result(let userName, let gender, let imc):
+                    ResultView(
+                        userName: userName,
+                        gender: gender,
+                        imc: imc,
+                        navigationPath: $navigationPath
+                    )
+                case .list:
+                    Text("Tela de listagem")
+                }
+            }
         }
-        .padding()
     }
 }
 
